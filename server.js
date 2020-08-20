@@ -29,19 +29,11 @@ const main = async () => {
   app.set('view engine', 'jsx');
   app.engine('jsx', require('express-react-views').createEngine());
 
-  app.get('/', require('./Routes/Public').public);
-
   const authorisedNamespace = express.Router()
 
   authorisedNamespace.get(
     '/generate',
     require('./Routes/Authorised').generate
-  );
-
-  authorisedNamespace.post(
-    '/generate',
-    upload.none(),
-    require('./Routes/Authorised').generated
   );
 
   app.use('/auth', authorisedNamespace);
